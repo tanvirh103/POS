@@ -1,9 +1,24 @@
 {
-    "node1":{
-        "publicKey":"",
-        "stakingCoin":"5"
+  "node": [
+    {
+      "publicKey": "hfdfdfu7f7d8d78d",
+      "stakingCoin": 54
     },
-    "node2":{
-        
+    {
+      "publicKey": "hfdfdfu7f7d8d78d",
+      "stakingCoin": 55
+    },
+    {
+      "publicKey": "hfdfdfu7f7d8d78d",
+      "stakingCoin": 56
+    },
+    {
+      "publicKey": "hfdfdfu7f7d8d78d",
+      "stakingCoin": 57
+    },
+    {
+      "publicKey": "hfdfdfu7f7d8d78d",
+      "stakingCoin": 58
     }
+  ]
 }
