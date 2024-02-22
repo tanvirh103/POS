@@ -1,23 +1,34 @@
 import { writeFile,readFile } from 'node:fs/promises';
-let obj={
-     node:[]
-};
-obj.node.push({publicKey:"hfdfdfu7ffrfr85885f7d8d78d",stakingCoin:54});
-obj.node.push({publicKey:"hfdfdfurhrjrjhfruu48475",stakingCoin:55});
-obj.node.push({publicKey:"hfdfdfu7f7d8d75756587568d",stakingCoin:56});
-obj.node.push({publicKey:"hfdfdfu7f7d8d78d75864576",stakingCoin:57});
-obj.node.push({publicKey:"hfdfdfu7f7d8d78djfdj485485",stakingCoin:58});
-let json=JSON.stringify(obj, null, 2);
-//writeFile('nodeinfo.json',json);
 let data=await readFile('nodeinfo.json','utf8');
 let parse=JSON.parse(data);
-//console.log(parse);
-// let filteredNodes = parse.node.filter(node => node.stakingCoin > 55);
-parse.node.sort(function(a, b){
-     return b.stakingCoin - a.stakingCoin} 
-);
 
-// Get the top 3 nodes
+parse.node.sort((a, b)=> b.stakingCoin - a.stakingCoin);
+
+
 let top3Nodes = parse.node.slice(0, 3);
 
-console.log(top3Nodes);
+
+let randomNodes = Math.floor(Math.random()*top3Nodes.length);
+let  selectedNode= top3Nodes[randomNodes];
+
+console.log("Selected Node's Public Key:",selectedNode.publicKey);
+let pool=await readFile('mempool.json','utf8');
+let mem=JSON.parse(pool);
+
+let transactionInfo = [];
+
+mem.forEach((transaction, index) => {
+    let info = {
+        transactionNumber: index + 1,
+        from: transaction.from,
+        to: transaction.to,
+        amount: transaction.transactionFee,
+    };
+    transactionInfo.push(info);
+});
+
+// Write the structured transaction information into a JSON file
+let transactionInfoJson = JSON.stringify(transactionInfo, null, 2);
+await writeFile('transactionInfo.json', transactionInfoJson);
+
+console.log("Transaction information has been written to transactionInfo.json");
