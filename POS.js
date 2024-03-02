@@ -58,10 +58,7 @@ const generateBlockInfo = async () => {
     };
 
     mem.forEach((transaction, index) => {
-      const transactionHash = crypto
-        .createHash('sha256')
-        .update(JSON.stringify(transaction))
-        .digest('hex');
+      const transactionHash = crypto.createHash('sha256').update(JSON.stringify(transaction)).digest('hex');
 
       const transactionInfo = {
         from: transaction.from,
