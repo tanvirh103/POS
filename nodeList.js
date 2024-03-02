@@ -1,7 +1,6 @@
 import { writeFile, readFile } from 'fs/promises';
 import crypto from 'crypto';
 
-//Merkle Tree
 const buildMerkleTree = transactions => {
   if (transactions.length === 0) {
     return null;
@@ -27,7 +26,6 @@ const buildMerkleTree = transactions => {
   return tree[0];
 };
 
-// create block
 const generateBlockInfo = async () => {
   try {
     const data = await readFile('nodeinfo.json', 'utf8');
@@ -78,10 +76,7 @@ const generateBlockInfo = async () => {
     console.log('Merkle Root:', merkleRoot);
     blockWithTransactions.blockInfo.merkleRoot = merkleRoot;
 
-    const blockHash = crypto
-      .createHash('sha256')
-      .update(JSON.stringify(blockWithTransactions.blockInfo))
-      .digest('hex');
+    const blockHash = crypto.createHash('sha256').update(JSON.stringify(blockWithTransactions.blockInfo)).digest('hex');
     console.log('Block Hash:', blockHash);
 
     blockWithTransactions.blockInfo.blockHash = blockHash;
